@@ -1,0 +1,92 @@
+﻿@model IEnumerable<AspNetMVC.ViewModels.PessoaFisicaViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Pessoas Físicas</h2>
+
+<p>
+    @Html.ActionLink("Novo Cadastro", "Create", null, new { @class = "btn btn-lg btn-success" })
+</p>
+
+@using (Html.BeginForm())
+{
+    <div class="panel-group">
+        <div class="panel panel-info panel-body">
+            @Html.Label("CPF:", new { @class = "col-md-1 control-label" })
+            <div class="col-md-2">
+                @Html.TextBox("CPF", "", new { @class = "form-control", @maxlength="11" })
+            </div>
+            @Html.Label("Nome:", new { @class = "col-md-1 control-label" })
+            <div class="col-md-3">
+                @Html.TextBox("Nome", "", new { @class = "form-control" })
+            </div>
+
+            @Html.Label("RG:", new { @class = "col-md-1 control-label" })
+            <div class="col-md-2">
+                @Html.TextBox("RG", "", new { @class = "form-control", @maxlength = "10" })
+            </div>
+            <div class="col-md-1">
+                <input type="submit" value="Filtrar" class="btn btn-primary" />
+            </div>
+            <div class="col-md-1">
+                @Html.ActionLink("Limpar", "Index", "", new { @class = "btn btn-default" } )
+            </div>
+        </div>
+    </div>
+}
+
+<table class="table table-striped">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CPF)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RG)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sexo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DataNascimento)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CPFMascarado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RG)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sexo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataNascimento)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td align="right">
+                @Html.ActionLink("Editar", "Edit", new { id = item.PessoaId }, new { @class = "btn btn-warning" }) |
+                @Html.ActionLink("Detalhes", "Details", new { id = item.PessoaId }, new { @class = "btn btn-info" }) |
+                @Html.ActionLink("Apagar", "Delete", new { id = item.PessoaId }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+    }
+
+</table>
